@@ -4,7 +4,7 @@ import pandas, json
 from os import makedirs
 
 
-csv_file = r".\data\Quotes.csv"
+csv_file = r"data/Quotes.csv"
 
 file = pandas.read_csv(csv_file)[:5]
 
