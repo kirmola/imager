@@ -7,7 +7,7 @@ import concurrent.futures
 
 csv_file = r"data/Quotes.csv"
 
-file = pd.read_csv(csv_file)
+file = pd.read_csv(csv_file)[:5]
 
 
 def generate_image(quote):
