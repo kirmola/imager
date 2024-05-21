@@ -6,7 +6,7 @@ from os import makedirs
 
 csv_file = r"data/Quotes.csv"
 
-file = pandas.read_csv(csv_file)
+file = pandas.read_csv(csv_file)[:5]
 
 
 def main():

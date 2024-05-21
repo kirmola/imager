@@ -24,6 +24,25 @@ jobs:
       - name: Run Imager Script
         run: python imager.py
 
+      - name: Upload generated images as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-images
+          path: generated_images
+
+  upload-images:
+    needs: run-imager-script
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download generated images artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-images
+          path: generated_images
 
       - name: Upload to Cloudflare R2
         uses: ryand56/r2-upload-action@latest
