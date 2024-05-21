@@ -1,0 +1,35 @@
+name: Run Imager Script
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  run-imager-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Imager Script
+        run: python imager.py
+
+
+      - name: Upload to Cloudflare R2
+        uses: ryand56/r2-upload-action@latest
+        with:
+            r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+            r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+            r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+            r2-bucket: ${{ secrets.R2_BUCKET }}
+            source-dir: generated_images

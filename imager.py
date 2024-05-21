@@ -6,14 +6,14 @@ from os import makedirs
 
 csv_file = r".\data\Quotes.csv"
 
-file = pandas.read_csv(csv_file)
+file = pandas.read_csv(csv_file)[:5]
 
 
 def main():
     makedirs("generated_images", exist_ok=True)
 
     quotes = []
-
+    index = 1
     for each in zip(file["quote"], file["images"]):
         quotes.append(
             {
@@ -76,6 +76,8 @@ def main():
         thumbnail.save(f"generated_images/{quote["thumbnail"]}")
         image.close()
         thumbnail.close()
+        print(f"Created: {index}")
+        index += 1
 
 
 if __name__ == "__main__":
