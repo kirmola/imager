@@ -29,4 +29,4 @@ jobs:
         with:
           rclone_config: ${{ secrets.RCLONE_CONFIG }}
           
-      - run: rclone copy source:generated_images dest:./ --transfers 5000 --checkers 5000
+      - run: rclone move generated_images r2:kmcdn --transfers 5000 --checkers 5000
